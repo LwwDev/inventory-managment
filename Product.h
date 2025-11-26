@@ -6,4 +6,4 @@ struct Product {
     std::string name;
     int quantity;
     double price;
-}
+};
