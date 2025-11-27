@@ -33,23 +33,53 @@ FUNCTION ORGANIZATION:
 #include <vector>
 
 char Menu();
+void AddProduct(std::vector<Product>& inventory, int& lastID);
 
 int main(){
+    std::vector<Product> inventory; // creates a vector with the custom struct we made product.h we also name this invetory
+    int lastID = 223;
+
+    inventory.push_back({++lastID, "apple", 2.5, 10});
+    inventory.push_back({++lastID, "banana", 4.2, 20});
+    inventory.push_back({++lastID, "watermelon", 6, 5});
+
+
+
+
+
     char choice = Menu();
     std::cout << choice;
 
     switch(choice){
-        case 1: //DisplayAll(); break;
-        case 2: //AddProduct(); break;
+        case '1': //DisplayAll(); break;
+        case '2': AddProduct(); break;
+        case '7': std::cout << "test"; break;
         default: std::cout << "invalid"; break;
     }
 
     return 0;
 }
 
+void AddProduct(std::vector<Product>& inventory, int& lastID){
+    Product p;
+    p.id = ++lastID;
+    std::cout << "Enter Product name: ";
+    std::cin >> p.name;
+
+    do{
+        std::cout << "Enter a price: ";
+        std::cin >> p.price;
+        if(p.price <= 0) std::cout << "Price must be over 0";
+    }while(p.price <= 0);
+
+
+
+}
+
+
 char Menu(){
-    char opt;
-    while(true){
+    char opt; //opt char just for holding answer
+    while(true){ //keep going 
     std::cout << "========================================\n"
               << "        INVENTORY MANAGEMENT\n"  
               << "========================================\n";
@@ -60,12 +90,12 @@ char Menu(){
               << "5. Total inventory value\n"
               << "6. Remove Product\n"
               << "7. Exit\n";
-    std::cin >> opt;
-    if (opt > '7'){ std::cout << "invalid option. Try again\n\n"; continue;}
-    if (opt == '7'){std::cout << " Exiting program...\n"; break;}
+    std::cin >> opt; //getting answer
+    if (opt > '7'){ std::cout << "invalid option. Try again\n\n"; continue;} // if answer is larger then 7 make it invalid
+    if (opt == '7'){std::cout << " Exiting program...\n"; break;} // if equal 7 leave loop
     
-    return opt;
+    return opt; //return opt to main function
     }
-    return '7';
+    return '7'; // just to satisfy compiler
 }
 
