@@ -2,7 +2,7 @@
 Inventory management system 
 */
 #include <iostream>
-#include <Product.h>
+#include "Product.h"
 #include <vector>
 
 char Menu();
